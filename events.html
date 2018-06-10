@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+
+<div id="app"></div>
+
+
+<!-- Put this in the HTML section in JSFiddle! -->
+<script>
+	const vm = new Vue({
+		el: '#app',
+		data: {
+			counter: 0,
+			value: 0
+		},
+		methods: {
+			alert: function () {
+				alert('here is the alert');
+			},
+			keydownFunc: function (event) {
+				this.value = event.target.value
+			}
+		},
+		template: `
+            <div id="exercise">
+			<div>
+			<button v-on:click="alert">Show Alert</button>
+			</div>
+			<div>
+			<input type="text" v-on:keydown="keydownFunc">
+			<p>{{ value }}</p>
+			</div>
+			<div>
+			<input type="text" v-on:keydown.enter="keydownFunc">
+			<p>{{ value }}</p>
+			</div>
+			</div>`
+	})
+
+</script>
+</html>

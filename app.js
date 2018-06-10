@@ -1,18 +1,29 @@
 const vm = new Vue({
 	el: '#app',
 	data: {
-		title: 'Hello World!',
-		link: 'http://example.co.uk',
-		finishLink: '<a href="http://example.co.uk">This is an example</a>'
+		counter: 0,
+		x: 0,
+		y: 0,
 	},
 	methods: {
-		sayHello: function() {
-			return this.title;
+		increase: function(step, event) {
+			return this.counter += step;
+		},
+		updateCoordinates: function(event) {
+			this.x = event.clientX;
+			this.y = event.clientY;
+		},
+		alertMe: function() {
+			alert('YES!');
 		}
 	},
-	template: `<div>
-								<h1 v-once>{{title}}</h1>
-								<p v-html="finishLink"></p>
-								<p>{{ sayHello() }} - <a v-bind:href="link">Google</a></p>
+	template: `<div id="app">
+								<button v-on:click="increase(2, $event)">Click me</button>
+								<p>{{ counter }}</p>
+								<p v-on:mousemove="updateCoordinates">
+								Coordinates: {{x}} / {{y}}
+								<span v-on:mousemove.stop="">Dead spot</span>
+								</p>
+								<input type="text" v-on:keyup.enter.space="alertMe" />
 						</div>`
 })
